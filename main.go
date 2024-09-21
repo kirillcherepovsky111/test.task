@@ -74,6 +74,18 @@ func main() {
 		return
 	}
 
+	// Проверка на римское вычитание или деление, результат которых меньше 1
+	if isRoman(firstNum) {
+		if operator == "-" && *result < 1 {
+			fmt.Println("Ошибка: результат вычитания римских чисел меньше единицы")
+			return
+		}
+		if operator == "/" && *result < 1 {
+			fmt.Println("Ошибка: результат деления римских чисел меньше единицы")
+			return
+		}
+	}
+
 	if isRoman(firstNum) {
 		fmt.Println("Output")
 		fmt.Println(ArabicToRoman[*result])
