@@ -48,13 +48,11 @@ func main() {
 	parsedInput := inputPattern.FindAllString(input, -1)
 
 	if len(parsedInput) != 3 {
-		fmt.Println("Ошибка: ввод должен содержать два числа и один оператор, например: 3 + 3")
-		return
+		panic("Ошибка: ввод должен содержать два числа и один оператор, например: 3 + 3")
 	}
 
 	if !validateInput(parsedInput) {
-		fmt.Println("Ошибка: нельзя смешивать арабские и римские числа")
-		return
+		panic("Ошибка: нельзя смешивать арабские и римские числа")
 	}
 
 	firstNum, secondNum := parsedInput[0], parsedInput[2]
@@ -64,25 +62,21 @@ func main() {
 	secondValue, isValidSecondNum := RomanArabic[secondNum]
 
 	if !isValidFirstNum || !isValidSecondNum {
-		fmt.Println("Ошибка: некорректные числа")
-		return
+		panic("Ошибка: некорректные числа")
 	}
 
 	result := calculate(firstValue, secondValue, operator)
 	if result == nil {
-		fmt.Println("Ошибка: некорректный оператор")
-		return
+		panic("Ошибка: некорректный оператор")
 	}
 
 	// Проверка на римское вычитание или деление, результат которых меньше 1
 	if isRoman(firstNum) {
 		if operator == "-" && *result < 1 {
-			fmt.Println("Ошибка: результат вычитания римских чисел меньше единицы")
-			return
+			panic("Ошибка: результат вычитания римских чисел меньше единицы")
 		}
 		if operator == "/" && *result < 1 {
-			fmt.Println("Ошибка: результат деления римских чисел меньше единицы")
-			return
+			panic("Ошибка: результат деления римских чисел меньше единицы")
 		}
 	}
 
